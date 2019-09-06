@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MAIN/MAIN.iml" filepath="$PROJECT_DIR$/MAIN/MAIN.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SRC/Крестики-нолики.iml" filepath="$PROJECT_DIR$/SRC/Крестики-нолики.iml" />
+    </modules>
+  </component>
+</project>
