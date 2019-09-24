@@ -136,7 +136,7 @@ public class Main_Game {
         return quantity;
     }
 
-    public static boolean isCellExists(int x, int y) {
+    private static boolean isCellExists(int x, int y) {
 
         boolean result = true;
         if (x < 0 || y < 0 || x >= SIZE || y >= SIZE) {
@@ -149,7 +149,7 @@ public class Main_Game {
         boolean result = true;
         if (x < 0 || x >= SIZE || y < 0 || y >= SIZE) {
             result = false;
-        } else if (map[x][y] != DOT_EMPTY) {
+        } else if (map[y][x] != DOT_EMPTY) {
             result = false;
         }
         return result;
@@ -173,7 +173,13 @@ public class Main_Game {
         boolean result = true;
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                if (map[i][j] == DOT_EMPTY) result = false;
+                if (map[i][j] == DOT_EMPTY) {
+                    result = false;
+                    break;
+                }
+            }
+            if (!result) {
+                break;
             }
         }
         return result;
