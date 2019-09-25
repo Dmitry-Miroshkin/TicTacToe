@@ -25,7 +25,7 @@ public class Main_Game {
             if (SILLY_MODE) {
                 sillyComp();
             } else {
-                smartComp();
+                nextTurnWin();
             }
             if (isEndGame(DOT_O)) {
                 System.out.println("Игра закончена");
@@ -94,13 +94,9 @@ public class Main_Game {
 
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-
                 if (map[i][j] == DOT_EMPTY) {
-
                     int temp = checkCellsNearby(i, j);
-
                     if (temp > numOfSameSimybolsNearby) {
-
                         numOfSameSimybolsNearby = temp;
                         x = i;
                         y = j;
@@ -108,17 +104,12 @@ public class Main_Game {
                 }
             }
         }
-
         if (numOfSameSimybolsNearby > 0) {
-
             System.out.println("Компьютер выбрал ячейку " + (y + 1) + " " + (x + 1));
             map[y][x] = DOT_O;
-
         } else {
             sillyComp();
         }
-
-
     }
 
     private static int checkCellsNearby(int x, int y) {
@@ -183,6 +174,43 @@ public class Main_Game {
             }
         }
         return result;
+    }
+
+    private static void nextTurnWin() {
+        boolean humWin = false;
+        boolean compWin = false;
+        for (int i = 0; i < (SIZE * SIZE); i++) {
+            int x = i / SIZE;
+            int y = i % SIZE;
+            if (map[y][x] == DOT_EMPTY) {
+                map[y][x] = DOT_X;
+                if (checkWin(DOT_X)) {
+                    System.out.println("Компьютер выбрал ячейку " + (y + 1) + " " + (x + 1));
+                    map[y][x] = DOT_O;
+                    humWin = true;
+                    break;
+                }
+                map[y][x] = DOT_EMPTY;
+            }
+        }
+        if (!humWin) {
+            for (int i = 0; i < (SIZE * SIZE); i++) {
+                int x = i / SIZE;
+                int y = i % SIZE;
+                if (map[y][x] == DOT_EMPTY) {
+                    map[y][x] = DOT_O;
+                    if (checkWin(DOT_O)) {
+                        System.out.println("Компьютер выбрал ячейку " + (y + 1) + " " + (x + 1));
+                        map[y][x] = DOT_O;
+                        compWin = true;
+                        break;
+                    }
+                    map[y][x] = DOT_EMPTY;
+                }
+            }
+
+        }
+        if (!compWin && !humWin) sillyComp();
     }
 
     private static boolean checkWin(char playerSymbol) {
