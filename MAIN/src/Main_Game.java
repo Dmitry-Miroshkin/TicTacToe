@@ -86,56 +86,6 @@ public class Main_Game {
         map[y][x] = DOT_O;
     }
 
-    private static void smartComp() {
-        int x = 0;
-        int y = 0;
-
-        int numOfSameSimybolsNearby = 0;
-
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                if (map[i][j] == DOT_EMPTY) {
-                    int temp = checkCellsNearby(i, j);
-                    if (temp > numOfSameSimybolsNearby) {
-                        numOfSameSimybolsNearby = temp;
-                        x = i;
-                        y = j;
-                    }
-                }
-            }
-        }
-        if (numOfSameSimybolsNearby > 0) {
-            System.out.println("Компьютер выбрал ячейку " + (y + 1) + " " + (x + 1));
-            map[y][x] = DOT_O;
-        } else {
-            sillyComp();
-        }
-    }
-
-    private static int checkCellsNearby(int x, int y) {
-        int quantity = 0;
-
-        for (int i = x - 1; i < 2; i++) {
-            for (int j = y - 1; j < 2; j++) {
-
-                if (isCellExists(i, j) && map[i][j] == DOT_O) {
-
-                    quantity++;
-                }
-            }
-        }
-        return quantity;
-    }
-
-    private static boolean isCellExists(int x, int y) {
-
-        boolean result = true;
-        if (x < 0 || y < 0 || x >= SIZE || y >= SIZE) {
-            result = false;
-        }
-        return result;
-    }
-
     private static boolean isCellValid(int x, int y) {
         boolean result = true;
         if (x < 0 || x >= SIZE || y < 0 || y >= SIZE) {
